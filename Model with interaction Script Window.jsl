@@ -1,0 +1,55 @@
+
+Fit Model(
+	Y( :MFI ),
+	Effects(
+		:SA, :M%, :Xf, :pH, :Viscosity, :Ambient Temp, :SA * :M%, :SA * :Xf,
+		:SA * :pH, :SA * :Viscosity, :SA * :Ambient Temp, :M% * :Xf, :M% * :pH,
+		:M% * :Viscosity, :M% * :Ambient Temp, :Xf * :pH, :Xf * :Viscosity,
+		:Xf * :Ambient Temp, :pH * :Viscosity, :pH * :Ambient Temp,
+		:Viscosity * :Ambient Temp
+	),
+	Personality( "Standard Least Squares" ),
+	Emphasis( "Effect Screening" ),
+	Run(
+		Profiler(
+			1,
+			Confidence Intervals( 1 ),
+			Term Value(
+				SA( 75.8, Lock( 0 ), Show( 1 ) ),
+				M%( 1.705, Lock( 0 ), Show( 1 ) ),
+				Xf( 15.573, Lock( 0 ), Show( 1 ) ),
+				pH( 4.0785, Lock( 0 ), Show( 1 ) ),
+				Viscosity( 11.652, Lock( 0 ), Show( 1 ) ),
+				Ambient Temp( 13.377, Lock( 0 ), Show( 1 ) )
+			)
+		),
+		:MFI << {Summary of Fit( 0 ), Analysis of Variance( 1 ),
+		Parameter Estimates( 1 ), Effect Details( 0 ), Lack of Fit( 0 ),
+		Sorted Estimates( 0 ), Plot Actual by Predicted( 1 ), Plot Regression( 0 ),
+		Plot Residual by Predicted( 1 ), Plot Studentized Residuals( 1 ),
+		Plot Effect Leverage( 0 ), Plot Residual by Normal Quantiles( 0 ),
+		Box Cox Y Transformation( 0 )}
+	),
+	SendToReport(
+		Dispatch(
+			{"Response MFI", "Actual by Predicted Plot"},
+			"2",
+			ScaleBox,
+			{Min( 194.48152482619 ), Max( 202.745987636107 ), Inc( 1 ),
+			Minor Ticks( 0 )}
+		),
+		Dispatch(
+			{"Response MFI"},
+			"Parameter Estimates",
+			OutlineBox,
+			{Close( 0 )}
+		),
+		Dispatch(
+			{"Response MFI", "Prediction Profiler"},
+			"10000",
+			ScaleBox,
+			{Min( 194.48152482619 ), Max( 202.745987636107 ), Inc( 1 ),
+			Minor Ticks( 0 )}
+		)
+	)
+);
